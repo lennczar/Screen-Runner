@@ -30,12 +30,27 @@ function draw() {
 }
 
 function request(action, data = {}) {
-  chrome.tabs.getSelected(null, 
-  	function(tab) {
-    	chrome.tabs.sendRequest(tab.id, {
-    		'action' : action,
-    	  'data' : data
-    	});
-  	}
-  )
+	let res;
+  chrome.tabs.getSelected(null, function(tab) {
+    chrome.tabs.sendRequest(tab.id, {
+    	'action' : action,
+      'data' : data
+    }, function(response) {
+    	res = response;
+    });
+  })
+  return res;
 }
+
+chrome.runtime.onMessage.addListener(
+	function listen(request, sender, callback) {
+		if (sender.tab) { // from content script
+			if (request.action == "start") {
+				console.log("HELLOU?");
+				//sendResponse({});
+			}
+		}
+	}
+);
+
+//https://aarongusman.wordpress.com/2011/03/30/communication-between-chrome-extension-content-scripts-and-extension-pages/
