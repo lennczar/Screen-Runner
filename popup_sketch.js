@@ -12,8 +12,6 @@ function setup() {
 
 	let p = Polygon.fromCircle(width/2, height/2, 40, 3);
 
-	//p.display();
-
 	//Button: play
 	button["play"] = new PolyButton(p, "play", 
 		{
