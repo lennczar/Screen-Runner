@@ -17,7 +17,7 @@ function setup() {
 	button["play"] = new PolyButton(p, "play", 
 		{
 			text : {fill: color(0)}, mOtext : {}, 
-			box : {stroke: color(200), strokeWeight: 1}, mObox : {}
+			box : {stroke: color(0), strokeWeight: 1}, mObox : {stroke: color(255, 255, 0), strokeWeight: 1}
 		},
 		undefined, lay.gui, undefined, true, () => {
 			//func
@@ -26,5 +26,5 @@ function setup() {
 
 function draw() {
 	Screen[scr]();
-	updateMouse(40);
+	updateMouse(0);
 }

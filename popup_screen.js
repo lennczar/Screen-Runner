@@ -4,7 +4,7 @@ const Screen = {
 
 		stroke(0);
 		strokeWeight(4);
-		if (mousePressed) line(mouseX, mouseY, pmouseX, pmouseY);
+		if (mouseIsPressed) line(mouseX, mouseY, pmouseX, pmouseY);
 
 		showButtons("play");
 
