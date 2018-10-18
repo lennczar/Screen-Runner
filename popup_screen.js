@@ -2,7 +2,8 @@ const Screen = {
 	
 	"start" : function() {
 
-		//background(255);
+		lay.bg.background(255);
+
 		stroke(0);
 		strokeWeight(4);
 		if (mouseIsPressed) line(mouseX, mouseY, pmouseX, pmouseY);
