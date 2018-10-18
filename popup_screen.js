@@ -14,6 +14,10 @@ const Screen = {
 			image(lay[l], 0, 0);
 			lay[l].clear();
 		}
+	},
+
+	"running" : function() {
+		
 	}
 
 }

@@ -19,11 +19,23 @@ function setup() {
 			box : {stroke: color(0), strokeWeight: 1}, mObox : {stroke: color(255, 255, 0), strokeWeight: 1}
 		},
 		undefined, lay.gui, undefined, true, () => {
-			//func
+			scr = "running";
+			request("start");
 		});
 }
 
 function draw() {
 	Screen[scr]();
 	updateMouse(0);
+}
+
+function request(action, data = {}) {
+  chrome.tabs.getSelected(null, 
+  	function(tab) {
+    	chrome.tabs.sendRequest(tab.id, {
+    		'action' : action,
+    	  'data' : data
+    	});
+  	}
+  )
 }
