@@ -16,10 +16,10 @@ function setup() {
 	//Button: play
 	button["play"] = new PolyButton(p, "play", 
 		{
-			text : {}, mOtext : {}, 
-			box : {}, mObox : {}
+			text : {fill: color(0)}, mOtext : {}, 
+			box : {stroke: color(200), strokeWeight: 1}, mObox : {}
 		},
-		undefined, lay.gui, undefined, "scr == 'start'", () => {
+		undefined, lay.gui, undefined, true, () => {
 			//func
 		});
 }
