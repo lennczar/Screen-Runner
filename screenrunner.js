@@ -10,7 +10,7 @@ function setup() {
 }
 
 function draw() {
-	
+	if (mouseIsPressed) line(mouseX, mouseY, pmouseX, pmouseY);
 }
 
 // function windowResized() {

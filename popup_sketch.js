@@ -6,6 +6,7 @@ function setup() {
 	createCanvas(300, 300);
 
 	lay = {
+		"bg" : createGraphics(width, height),
 		"gui" : createGraphics(width, height)
 	};
 
