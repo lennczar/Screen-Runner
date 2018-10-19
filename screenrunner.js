@@ -32,7 +32,6 @@ function start() {
 
 function request(action, data = {}) {
 	let res;
-	console.log(chrome);
   chrome.runtime.sendMessage({
     'action' : action,
     'data' : data
