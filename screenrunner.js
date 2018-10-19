@@ -26,15 +26,17 @@ function start() {
 	elements.splice(0, elements.indexOf(...body)+1);
 	// console.log(elements);
 
-	/*
-	let collidables = elements.filter(e => 
-		e.tagName != "P" &&
-		e.tagName != "P"
+	let collidables = elements.filter(e => isValid(e));
 
-	);
-	*/
+	console.log(collidables);
+	fill(255, 50);
+	stroke(255, 0, 0);
 
-
+	for (let c of collidables) {
+		let box = c.getBoundingClientRect();
+		console.log(c, box);
+		rect(box.x, box.y, box.width, box.height);
+	}
 
 	player = new Player();
 	console.log("running!");
@@ -75,3 +77,14 @@ chrome.extension.onRequest.addListener(listen);
 // function windowResized() {
 // 	cnv.resizeCanvas(document.body.clientWidth, document.body.clientHeight);
 // }
+
+function isValid(e) {
+	let legit = [
+		"VIDEO", "VAR", "TEXTAREA", "TABLE", "STRONG", "SELECT", "SAMP", "RUBY", 
+		"PROGRESS", "PRE", "P", "OUTPUT", "LABEL", "KBD", "INPUT", "IMG", "IFRAME",
+		"H6", "H5", "H4", "H3", "H2", "H1", "FIGCAPTION", "EMBED", "EM", "DT", 
+		"DIALOG", "DETAILS", "DD", "CODE", "CANVAS", "BUTTON", "BLOCKQUOTE", "AUDIO",
+		"ARTICLE",	 "ADRESS", "A"
+	];
+	return legit.find(t => t == e.tagName) != undefined;
+}
