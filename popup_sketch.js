@@ -12,6 +12,8 @@ function setup() {
 
 	let p = Polygon.fromCircle(width/2, height/2, 40, 3);
 
+	p.display();
+
 	//Button: play
 	button["play"] = new PolyButton(p, "play", 
 		{
@@ -28,6 +30,9 @@ function draw() {
 	Screen[scr]();
 	updateMouse(0);
 }
+
+
+//////////communication popup.js <-> screenrunner.js////////////////
 
 function request(action, data = {}) {
 	let res;
@@ -54,3 +59,5 @@ chrome.runtime.onMessage.addListener(
 );
 
 //https://aarongusman.wordpress.com/2011/03/30/communication-between-chrome-extension-content-scripts-and-extension-pages/
+
+////////////////////////////////////////////////////////////////////

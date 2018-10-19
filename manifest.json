@@ -10,6 +10,9 @@
 			"js" : [
 				"p5.js",
 				"p5.dom.js",
+				"GUI.js",
+				"screenrunner_screen.js",
+				"player.js",
 				"screenrunner.js"
 			]
 		}

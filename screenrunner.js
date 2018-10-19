@@ -1,6 +1,6 @@
 'use strict'
 
-let cnv;
+let cnv, ship;
 
 function setup() {
 	noLoop();
@@ -8,9 +8,25 @@ function setup() {
 }
 
 function draw() {
+	if (frameCount == 1) return;
+	console.log("draw");
 	if (mouseIsPressed) line(mouseX, mouseY, pmouseX, pmouseY);
-	request("start");
+	//request("start");
+	ship.update();
+	cnv.clear();
+	ship.display();
 }
+
+function start() {
+	cnv = createCanvas(document.body.clientWidth, document.body.clientHeight);
+	cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
+	//cnv.background(100);
+	ship = new Player();
+
+	loop();
+}
+
+//////////communication popup.js <-> screenrunner.js////////////////
 
 function request(action, data = {}) {
 	let res;
@@ -27,15 +43,14 @@ function request(action, data = {}) {
 function listen(request, sender, callback) {
 	if (!sender.tab) { // from popup
 		if (request.action == "start") {
-	  	let cnv = createCanvas(document.body.clientWidth, document.body.clientHeight);
-			cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
-			cnv.background(100);
-			loop();
+			start();
 		}
 	}
 }
 
 chrome.extension.onRequest.addListener(listen);
+
+////////////////////////////////////////////////////////////////////
 
 // function windowResized() {
 // 	cnv.resizeCanvas(document.body.clientWidth, document.body.clientHeight);
