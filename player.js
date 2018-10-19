@@ -22,18 +22,17 @@ class Player {
  	 	this.vel.mult(0.95);
 
  	 	// auto scroll
- 	 	let scrollPosY = window.visualViewport.pageTop;
- 	 	let h = window.innerHeight;
+
  	 	// bottom
- 	 	if (this.pos.y + this.vel.y >= scrollPosY + 0.75*h && Math.sign(this.vel.y) ==  1)
+ 	 	if (this.pos.y + this.vel.y >= scrollPosY + 0.75*VIEW_H && Math.sign(this.vel.y) ==  1)
  	 		window.scrollTo(/*scrollPosX =*/ 0, scrollPosY + this.vel.y);
  	 	// top
- 	 	if (this.pos.y + this.vel.y <= scrollPosY + 0.25*h && Math.sign(this.vel.y) == -1)
+ 	 	if (this.pos.y + this.vel.y <= scrollPosY + 0.25*VIEW_H && Math.sign(this.vel.y) == -1)
  	 		window.scrollTo(/*scrollPosX =*/ 0, scrollPosY + this.vel.y);
 
 
- 	 	line(0, scrollPosY + 0.75*h, width, scrollPosY + 0.75*h);
- 	 	line(0, scrollPosY + 0.25*h, width, scrollPosY + 0.25*h);
+ 	 	line(0, scrollPosY + 0.75*VIEW_H, VIEW_W, scrollPosY + 0.75*VIEW_H);
+ 	 	line(0, scrollPosY + 0.25*VIEW_H, VIEW_W, scrollPosY + 0.25*VIEW_H);
 
  	}
 
@@ -50,6 +49,10 @@ class Player {
  	 		triangle(tp.x + 0.5*s*sin(rot -PI), tp.y + 0.5*s*cos(rot -PI),
  	 				 tp.x + 0.1*s*sin(rot-HALF_PI), tp.y + 0.1*s*cos(rot-HALF_PI),
  	 				 tp.x + 0.1*s*sin(rot+HALF_PI), tp.y + 0.1*s*cos(rot+HALF_PI));
+ 	}
+
+ 	edge() {
+ 		if (this.pos.x > )
  	}
 
 }
