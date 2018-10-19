@@ -1,6 +1,7 @@
 'use strict'
 
 let cnv, player;
+let elements = [];
 
 function setup() {
 	noLoop();
@@ -18,7 +19,19 @@ function draw() {
 function start() {
 	cnv = createCanvas(document.documentElement.scrollWidth, document.body.clientHeight);
 	cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
-	//cnv.background(100);
+	
+	// get elements & define collidables
+	elements = [...document.all];
+	let body = elements.filter(e => e.tagName == "BODY");
+	elements.splice(0, elements.indexOf(...body)+1);
+	// console.log(elements);
+
+	let collidables = elements.filter(e => 
+		e.tagName != "DIV" &&
+	);
+
+
+
 	player = new Player();
 	console.log("running!");
 
