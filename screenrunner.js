@@ -9,17 +9,18 @@ function setup() {
 
 function draw() {
 	if (frameCount == 1) return;
-	console.log("draw");
+	//console.log("draw");
 	cnv.clear();
 	player.update();
 	player.display();
 }
 
 function start() {
-	cnv = createCanvas(document.body.clientWidth, document.body.clientHeight);
+	cnv = createCanvas(document.documentElement.scrollWidth, document.body.clientHeight);
 	cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
 	//cnv.background(100);
 	player = new Player();
+	console.log("running!");
 
 	loop();
 }

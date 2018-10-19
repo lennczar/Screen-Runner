@@ -42,13 +42,13 @@ class Player {
 
 		window.scroll(scrollPosX, scrollPosY);
 
- 	 	//console.log(scrollPosY + 0.75*h);
- 	 	console.log(abs(this.pos.y-(scrollPosY+0.75*h)), this.vel.y);
+ 	  /*
+ 	 	line(scrollPosX, scrollPosY + 0.75*h, scrollPosX + w, scrollPosY + 0.75*h);
+ 	 	line(scrollPosX, scrollPosY + 0.25*h, scrollPosX + w, scrollPosY + 0.25*h);
 
-
- 	 	line(0, scrollPosY + 0.75*h, width, scrollPosY + 0.75*h);
- 	 	line(0, scrollPosY + 0.25*h, width, scrollPosY + 0.25*h);
-
+ 	 	line(scrollPosX + 0.75*w, scrollPosY, scrollPosX + 0.75*w, scrollPosY + h);
+ 	 	line(scrollPosX + 0.25*w, scrollPosY, scrollPosX + 0.25*w, scrollPosY + h);
+		*/
  	}
 
  	display() {
@@ -67,8 +67,8 @@ class Player {
  	}
 
  	edge() {
- 		if (this.pos.x + this.vel.x > document.body.clientWidth  || this.pos.x + this.vel.x < 0) this.vel.x = 0;
- 		if (this.pos.y + this.vel.y > document.body.clientHeight || this.pos.y + this.vel.y < 0) this.vel.y = 0;
+ 		if (this.pos.x + this.vel.x > width  || this.pos.x + this.vel.x < 0) this.vel.x = 0;
+ 		if (this.pos.y + this.vel.y > height || this.pos.y + this.vel.y < 0) this.vel.y = 0;
  	}
 
 }
