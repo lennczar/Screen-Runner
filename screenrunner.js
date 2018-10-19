@@ -26,9 +26,13 @@ function start() {
 	elements.splice(0, elements.indexOf(...body)+1);
 	// console.log(elements);
 
+	/*
 	let collidables = elements.filter(e => 
-		e.tagName != "DIV" &&
+		e.tagName != "P" &&
+		e.tagName != "P"
+
 	);
+	*/
 
 
 
