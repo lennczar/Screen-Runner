@@ -2,13 +2,6 @@
 
 let cnv, player;
 
-const PAGE_W = document.body.clientWidth;
-const PAGE_H = document.body.clientHeight;
-const	VIEW_W = window.innerWidth;
-const	VIEW_H = window.innerHeight;
-let scrollPosY = window.visualViewport.pageTop;
-let scrollPosX = window.visualViewport.pageLeft;
-
 function setup() {
 	noLoop();
 	console.log("abc");
