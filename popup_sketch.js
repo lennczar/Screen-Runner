@@ -50,9 +50,13 @@ function request(action, data = {}) {
 chrome.runtime.onMessage.addListener(
 	function listen(request, sender, callback) {
 		if (sender.tab) { // from content script
-			if (request.action == "start") {
-				console.log("HELLOU?");
-				//sendResponse({});
+			switch (request.action) {
+				case "start" :
+
+					//sendResponse({});
+					break;
+				default :
+					console.error("No such action found");
 			}
 		}
 	}
