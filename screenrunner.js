@@ -1,6 +1,6 @@
 'use strict'
 
-let cnv, ship;
+let cnv, player;
 
 function setup() {
 	noLoop();
@@ -12,21 +12,23 @@ function draw() {
 	console.log("draw");
 	if (mouseIsPressed) line(mouseX, mouseY, pmouseX, pmouseY);
 	//request("start");
-	ship.update();
+	player.update();
 	cnv.clear();
-	ship.display();
+	player.display();
 }
 
 function start() {
 	cnv = createCanvas(document.body.clientWidth, document.body.clientHeight);
 	cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
 	//cnv.background(100);
-	ship = new Player();
+	player = new Player();
 
 	loop();
 }
 
-//////////communication popup.js <-> screenrunner.js////////////////
+//--
+// COMMUNICATION: popup.js < > screenrunner.js
+//--
 
 function request(action, data = {}) {
 	let res;
@@ -42,15 +44,18 @@ function request(action, data = {}) {
 
 function listen(request, sender, callback) {
 	if (!sender.tab) { // from popup
-		if (request.action == "start") {
-			start();
+		switch (request.action) {
+			case "start" :
+				start();
+				//sendResponse({});
+				break;
+			default :
+				console.error("No such action found in popup");
 		}
 	}
 }
 
 chrome.extension.onRequest.addListener(listen);
-
-////////////////////////////////////////////////////////////////////
 
 // function windowResized() {
 // 	cnv.resizeCanvas(document.body.clientWidth, document.body.clientHeight);

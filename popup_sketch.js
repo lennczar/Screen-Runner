@@ -31,8 +31,9 @@ function draw() {
 	updateMouse(0);
 }
 
-
-//////////communication popup.js <-> screenrunner.js////////////////
+//--
+// COMMUNICATION: popup.js < > screenrunner.js
+//--
 
 function request(action, data = {}) {
 	let res;
@@ -56,12 +57,8 @@ chrome.runtime.onMessage.addListener(
 					//sendResponse({});
 					break;
 				default :
-					console.error("No such action found");
+					console.error("No such action found in content script");
 			}
 		}
 	}
 );
-
-//https://aarongusman.wordpress.com/2011/03/30/communication-between-chrome-extension-content-scripts-and-extension-pages/
-
-////////////////////////////////////////////////////////////////////
