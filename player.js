@@ -1,7 +1,7 @@
 class Player {
 
 	constructor() {
-		this.pos = createVector(width/2, 200);
+		this.pos = createVector(width/2, window.visualViewport.pageTop + 200);
 	 	this.vel = createVector(0, 0);
 	 	this.acc = createVector(0, -0.2);
 
