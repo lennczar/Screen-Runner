@@ -10,10 +10,8 @@ function setup() {
 function draw() {
 	if (frameCount == 1) return;
 	console.log("draw");
-	if (mouseIsPressed) line(mouseX, mouseY, pmouseX, pmouseY);
-	//request("start");
-	player.update();
 	cnv.clear();
+	player.update();
 	player.display();
 }
 

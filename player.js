@@ -1,9 +1,9 @@
 class Player {
 
 	constructor() {
-		this.pos = createVector(width/2, window.visualViewport.pageTop + 200);
+		this.pos = createVector(width/2, window.visualViewport.pageTop + 0.4*window.innerHeight);
 	 	this.vel = createVector(0, 0);
-	 	this.acc = createVector(0, -0.2);
+	 	this.acc = createVector(0, 0.2);
 
 	 	this.w = 3*PI/180;
 		this.boost = false;
@@ -20,6 +20,21 @@ class Player {
 
  	 	this.pos.add(this.vel);
  	 	this.vel.mult(0.95);
+
+ 	 	// auto scroll
+ 	 	let scrollPosY = window.visualViewport.pageTop;
+ 	 	let h = window.innerHeight;
+ 	 	// bottom
+ 	 	if (this.pos.y + this.vel.y >= scrollPosY + 0.75*h && Math.sign(this.vel.y) ==  1)
+ 	 		window.scrollTo(/*scrollPosX =*/ 0, scrollPosY + this.vel.y);
+ 	 	// top
+ 	 	if (this.pos.y + this.vel.y <= scrollPosY + 0.25*h && Math.sign(this.vel.y) == -1)
+ 	 		window.scrollTo(/*scrollPosX =*/ 0, scrollPosY + this.vel.y);
+
+
+ 	 	line(0, scrollPosY + 0.75*h, width, scrollPosY + 0.75*h);
+ 	 	line(0, scrollPosY + 0.25*h, width, scrollPosY + 0.25*h);
+
  	}
 
  	display() {
