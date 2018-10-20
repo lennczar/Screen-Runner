@@ -30,8 +30,6 @@ class Player {
 
  	 	this.cd--;
 
- 	 	console.log(this.proj.length);
-
  	 	this.edge();
  	 	this.crash();
  	 	//if (!this.crashed) this.pos.add(this.vel);

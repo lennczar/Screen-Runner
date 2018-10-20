@@ -20,6 +20,7 @@ function draw() {
 function start() {
 	cnv = createCanvas(document.documentElement.scrollWidth, document.body.clientHeight);
 	cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
+	console.log(imgData);
 
 	lay = {
 		"projectiles" : createGraphics(width, height),
