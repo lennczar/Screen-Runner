@@ -3,6 +3,7 @@ const imgData = [];
 function preload() {
 
 	function addImg(name) {
+<<<<<<< HEAD
 		imgData[name] = loadImage("https://res.cloudinary.com/screen-runner/content_images/gifs/" + name + ".png");
 =======
 		imgData[name] = chrome.runtime.getURL("assets/content_images/gifs/" + name + ".png");
