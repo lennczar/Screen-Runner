@@ -8,15 +8,12 @@ let scr = "start";
 
 function setup() {
 	noLoop();
-	console.log("abc");
-
-	
+	console.log("Arrays start at 1");
 }
 
 function draw() {
 	if (frameCount == 1) return;
 	Screenr[scr]();
-	//console.log("draw");
 }
 
 function start() {
@@ -24,6 +21,7 @@ function start() {
 	cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
 
 	lay = {
+		"projectiles" : createGraphics(width, height),
 		"player" : createGraphics(width, height),
 		"overlay" : createGraphics(width, height)
 	};
@@ -51,8 +49,6 @@ function start() {
 	player = new Player();
 	console.log("running!");
 
-
-	scr = "start";
 	loop();
 }
 

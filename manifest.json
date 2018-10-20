@@ -13,6 +13,7 @@
 				"GUI.js",
 				"screenrunner_screen.js",
 				"player.js",
+				"bullet.js",
 				"screenrunner.js",
 				"boxCollider.js"
 			]

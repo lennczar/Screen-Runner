@@ -8,16 +8,25 @@ class Player {
 	 	this.w = 3*PI/180;
 		this.boost = false;
 	 	this.crashed = false;
+
+	 	this.proj = [];
+	 	this.cooldown = 30;
+	 	this.cd = this.cooldown;
 	}
 
 	update() {
  	 	if (keyIsDown(LEFT_ARROW))  this.acc.rotate(-this.w);
  	 	if (keyIsDown(RIGHT_ARROW)) this.acc.rotate( this.w);
+ 	 	if (keyIsDown(32) && this.cd <= 0) this.shootBullet();
 
  	 	if (keyIsDown(UP_ARROW)) {
  	 		this.boost = true;
  	 		this.vel.add(this.acc);
  	 	} else this.boost = false;
+
+ 	 	this.cd--;
+
+ 	 	console.log(this.proj.length);
 
  	 	this.edge();
  	 	this.crash();
@@ -48,7 +57,8 @@ class Player {
 
 		window.scroll(scrollPosX, scrollPosY);
 
-		hitboxes.forEach(h => h.display());
+		// update bullets
+		for (let p of this.proj) p.update();
 
  	  /*
  	 	line(scrollPosX, scrollPosY + 0.75*h, scrollPosX + w, scrollPosY + 0.75*h);
@@ -66,7 +76,7 @@ class Player {
 			let res = h.collides(player.prediction());
 			if (res) {
 				player.crashed = true;
-				console.log(collidables[hitboxes.indexOf(h)]);
+				//console.log(collidables[hitboxes.indexOf(h)]);
 				break;
 			}
 		}
@@ -89,9 +99,9 @@ class Player {
  	 				 tp.x + 0.1*s*sin(rot-HALF_PI), tp.y + 0.1*s*cos(rot-HALF_PI),
  	 				 tp.x + 0.1*s*sin(rot+HALF_PI), tp.y + 0.1*s*cos(rot+HALF_PI));
 
- 	 	l.strokeWeight(4);
- 	 	let p = this.prediction();
- 	 	l.point(p.x, p.y);
+ 	 	// l.strokeWeight(4);
+ 	 	// let p = this.prediction();
+ 	 	// l.point(p.x, p.y);
  	}
 
  	edge() {
@@ -104,6 +114,11 @@ class Player {
  		let a = this.acc.copy();
  		a.setMag(10);
  		return p.add(a);
+ 	}
+
+ 	shootBullet() {
+ 		this.proj.push(new Bullet(this.pos.x, this.pos.y, this.acc));
+ 		this.cd = this.cooldown;
  	}
 
 }
