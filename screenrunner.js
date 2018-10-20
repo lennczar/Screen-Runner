@@ -17,7 +17,7 @@ function draw() {
 	player.crashed = false;
 	for (let h of hitboxes) {
 		let res = h.collides(player.prediction());
-		if (res != false) {
+		if (!res) {
 			player.crashed = true;
 			console.log(collidables[hitboxes.indexOf(h)]);
 			break;
@@ -50,12 +50,7 @@ function start() {
 		let box = c.getBoundingClientRect();
 		let origin = createVector(window.visualViewport.pageLeft + box.x, window.visualViewport.pageTop + box.y);
 		overlay.rect(origin.x, origin.y, box.width, box.height);
-		hitboxes.push(new Polygon(
-			origin.x		, origin.y		,
-			origin.x+c.w, origin.y		,
-			origin.x		, origin.y+c.h,
-			origin.x+c.w, origin.y+c.h
-		));
+		hitboxes.push(new BoxCollider(box.x, box.y, box.width, box.height));
 	}
 
 	player = new Player();

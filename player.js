@@ -44,6 +44,7 @@ class Player {
 		window.scroll(scrollPosX, scrollPosY);
 
 		image(overlay, 0, 0);
+		//hitboxes.forEach(h => h.display());
 
  	  /*
  	 	line(scrollPosX, scrollPosY + 0.75*h, scrollPosX + w, scrollPosY + 0.75*h);
