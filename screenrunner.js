@@ -1,29 +1,32 @@
 'use strict'
 
-let cnv, overlay, player;
+let cnv, player;
 let elements = [];
 let collidables = [];
 let hitboxes = [];
+let scr = "start";
 
 function setup() {
 	noLoop();
 	console.log("abc");
+
+	
 }
 
 function draw() {
 	if (frameCount == 1) return;
-	//Screen[scr];
+	Screenr[scr]();
 	//console.log("draw");
-	cnv.clear();
-	player.update();
-	player.display();
 }
 
 function start() {
 	cnv = createCanvas(document.documentElement.scrollWidth, document.body.clientHeight);
 	cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
 
-	overlay = createGraphics(width, height);
+	lay = {
+		"player" : createGraphics(width, height),
+		"overlay" : createGraphics(width, height)
+	};
 	
 	// get elements & define collidables
 	elements = [...document.all];
@@ -34,21 +37,32 @@ function start() {
   collidables = elements.filter(e => isValid(e));
 
 	console.log(collidables);
-	overlay.fill(255, 100);
-	overlay.stroke(255, 0, 0);
-	overlay.strokeWeight(4);
+	lay.overlay.fill(255, 100);
+	lay.overlay.stroke(255, 0, 0);
+	lay.overlay.strokeWeight(4);
 
 	for (let c of collidables) {
 		let box = c.getBoundingClientRect();
 		let origin = createVector(window.visualViewport.pageLeft + box.x, window.visualViewport.pageTop + box.y);
-		overlay.rect(origin.x, origin.y, box.width, box.height);
-		hitboxes.push(new BoxCollider(box.x, box.y, box.width, box.height));
+		lay.overlay.rect(origin.x, origin.y, box.width, box.height);
+		hitboxes.push(new BoxCollider(origin.x, origin.y, box.width, box.height));
 	}
 
 	player = new Player();
 	console.log("running!");
 
+
+	scr = "start";
 	loop();
+}
+
+function pause() {
+
+	//scr = "pause";
+}
+
+function stop() {
+	//scr = "stop";
 }
 
 //--

@@ -21,7 +21,11 @@ class Player {
 
  	 	this.edge();
  	 	this.crash();
- 	 	if (!this.crashed) this.pos.add(this.vel);
+ 	 	//if (!this.crashed) this.pos.add(this.vel);
+ 	 	if (!this.crashed)
+ 	 		this.pos.add(this.vel);
+ 	 	else
+ 	 		this.vel.mult(0);
  	 	this.vel.mult(0.95);
 
  	 	// auto scroll
@@ -44,8 +48,7 @@ class Player {
 
 		window.scroll(scrollPosX, scrollPosY);
 
-		image(overlay, 0, 0);
-		//hitboxes.forEach(h => h.display());
+		hitboxes.forEach(h => h.display());
 
  	  /*
  	 	line(scrollPosX, scrollPosY + 0.75*h, scrollPosX + w, scrollPosY + 0.75*h);
@@ -61,7 +64,7 @@ class Player {
 		player.crashed = false;
 		for (let h of hitboxes) {
 			let res = h.collides(player.prediction());
-			if (!res) {
+			if (res) {
 				player.crashed = true;
 				console.log(collidables[hitboxes.indexOf(h)]);
 				break;
@@ -71,24 +74,24 @@ class Player {
 
 
  	display() {
- 		let rot = -this.acc.heading() + HALF_PI, tp = this.pos, s = 10;
+ 		let l = lay.player, rot = -this.acc.heading() + HALF_PI, tp = this.pos, s = 10;
 
- 		strokeWeight(1);
+ 		l.strokeWeight(1).fill(255);
 
  		// space ship body
- 	 	triangle(tp.x + s*sin(rot), tp.y + s*cos(rot),
+ 	 	l.triangle(tp.x + s*sin(rot), tp.y + s*cos(rot),
  	 				 tp.x + 0.2*s*sin(rot-HALF_PI), tp.y + 0.2*s*cos(rot-HALF_PI),
  	 				 tp.x + 0.2*s*sin(rot+HALF_PI), tp.y + 0.2*s*cos(rot+HALF_PI));
 
  	 	// flame
  	 	if (this.boost)
- 	 		triangle(tp.x + 0.5*s*sin(rot -PI), tp.y + 0.5*s*cos(rot -PI),
+ 	 		l.triangle(tp.x + 0.5*s*sin(rot -PI), tp.y + 0.5*s*cos(rot -PI),
  	 				 tp.x + 0.1*s*sin(rot-HALF_PI), tp.y + 0.1*s*cos(rot-HALF_PI),
  	 				 tp.x + 0.1*s*sin(rot+HALF_PI), tp.y + 0.1*s*cos(rot+HALF_PI));
 
- 	 	strokeWeight(4);
+ 	 	l.strokeWeight(4);
  	 	let p = this.prediction();
- 	 	point(p.x, p.y);
+ 	 	l.point(p.x, p.y);
  	}
 
  	edge() {
@@ -99,7 +102,7 @@ class Player {
  	prediction() {
  		let p = this.pos.copy();
  		let a = this.acc.copy();
- 		a.setMag(20);
+ 		a.setMag(10);
  		return p.add(a);
  	}
 
