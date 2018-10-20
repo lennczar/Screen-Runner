@@ -16,7 +16,7 @@ class Bullet {
 
 	display() {
 		let l = lay.projectiles;
-		l.strokeWeight(4).stroke(140, 30, 60);
+		l.strokeWeight(4).stroke(255);
 		l.point(this.pos.x, this.pos.y);
 	}
 
