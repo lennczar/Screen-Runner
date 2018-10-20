@@ -1,25 +1,27 @@
 class GIF {
 
 	constructor() {
-		this.pos = createVector(arguments[0], arguments[1]);
-		this.w = arguments[2];
-		this.h = arguments[3];
-		this.rot = arguments[4];
-		this.freq = arguments[5];
-		this.loop = arguments[6];
-		this.frames = [...arguments].splice(7);
-		this.length = arguments.length -7;
+		this.self = arguments[0];
+		this.x = arguments[1];
+		this.y = arguments[2];
+		this.w = arguments[3];
+		this.h = arguments[4];
+		this.rot = arguments[5];
+		this.freq = arguments[6];
+		this.loop = arguments[7];
+		this.correct = arguments[8];
+		this.frames = [...arguments].splice(9);
+		this.length = arguments.length -9;
 		this.img = 0;
 	}
 
 	update() {
 		let l = lay.gifs;
-		push();
-			l.translate(this.pos.x, this.pos.y);
-			l.rotate(this.rot);
-			l.image(this.frames[this.img], 0, 0);
-		pop();
-		console.log(this.img);
+		l.push();
+			l.translate(eval(this.x), eval(this.y));
+			l.rotate(eval(this.rot));
+			l.image(this.frames[this.img], this.correct.x, this.correct.y, this.w, this.h);
+		l.pop();
 		if (frameCount % this.freq == 0) {
 			this.img++;
 			if (this.img == this.length) return this.stop();
@@ -34,7 +36,7 @@ class GIF {
 		if (this.loop) {
 			this.start();
 		} else {
-			//delete self
+			delete this;
 			return true;
 		}
 	}

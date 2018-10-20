@@ -12,6 +12,7 @@ class Player {
 	 	this.proj = [];
 	 	this.cooldown = 30;
 	 	this.cd = this.cooldown;
+	 	this.projID = 0;
 	}
 
 	update() {
@@ -21,10 +22,14 @@ class Player {
 
  	 	if (keyIsDown(UP_ARROW)) {
  	 		if (playingGIFs["boost"] == undefined) playingGIFs["boost"] = new GIF(
- 	 				this.pos.x, this.pos.y, 400, 400, this.acc.heading(), 5, true,
- 	 				imgData["duesentrieb1"],
- 	 				imgData["duesentrieb2"],
- 	 				imgData["duesentrieb3"]
+ 	 				this, "player.pos.x", "player.pos.y", 80, 80, "player.acc.heading() - HALF_PI", 3, true, {x : -36, y : -60},
+ 	 				imgData["antrieb_1"],
+ 	 				imgData["antrieb_2"],
+ 	 				imgData["antrieb_3"],
+ 	 				imgData["antrieb_4"],
+ 	 				imgData["antrieb_5"],
+ 	 				imgData["antrieb_6"],
+ 	 				imgData["antrieb_7"],
  	 			);
  	 		this.boost = true;
  	 		this.vel.add(this.acc);
@@ -67,7 +72,7 @@ class Player {
 		// update GIFs
 		for (let g in playingGIFs) playingGIFs[g].update();
 
-		console.log(playingGIFs);
+		//console.log(playingGIFs);
 
  	  /*
  	 	line(scrollPosX, scrollPosY + 0.75*h, scrollPosX + w, scrollPosY + 0.75*h);
@@ -126,7 +131,7 @@ class Player {
  	}
 
  	shootBullet() {
- 		this.proj.push(new Bullet(this.pos.x, this.pos.y, this.acc));
+ 		this.proj.push(new Bullet(this.pos.x, this.pos.y, this.acc, this.projID++));
  		this.cd = this.cooldown;
  	}
 
