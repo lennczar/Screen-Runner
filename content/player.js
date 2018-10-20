@@ -64,6 +64,11 @@ class Player {
 		// update bullets
 		for (let p of this.proj) p.update();
 
+		// update GIFs
+		for (let g of playingGIFs) g.update();
+
+		console.log(playingGIFs);
+
  	  /*
  	 	line(scrollPosX, scrollPosY + 0.75*h, scrollPosX + w, scrollPosY + 0.75*h);
  	 	line(scrollPosX, scrollPosY + 0.25*h, scrollPosX + w, scrollPosY + 0.25*h);
