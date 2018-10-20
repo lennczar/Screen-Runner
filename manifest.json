@@ -8,20 +8,20 @@
 				"<all_urls>"
 			],
 			"js" : [
-				"p5.js",
-				"p5.dom.js",
-				"GUI.js",
-				"screenrunner_screen.js",
-				"player.js",
-				"bullet.js",
-				"GIF.js",
-				"imgData.js",
-				"screenrunner.js",
-				"boxCollider.js"
+				"library/p5.js",
+				"library/p5.dom.js",
+				"library/GUI.js",
+				"content/screen.js",
+				"content/player.js",
+				"content/bullet.js",
+				"content/GIF.js",
+				"content/imgData.js",
+				"content/screenrunner.js",
+				"content/boxCollider.js"
 			]
 		}
 	],
 	"browser_action" : {
-		"default_popup" : "popup.html"
+		"default_popup" : "popup/popup.html"
 	}
 }

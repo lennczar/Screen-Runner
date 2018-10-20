@@ -4,7 +4,7 @@ let scr = "start";
 let img;
 
 function preload() {
-	img = loadImage('assets/images/fma.png');
+	img = loadImage('../assets/popup_images/fma.png');
 }
 
 function setup() {
