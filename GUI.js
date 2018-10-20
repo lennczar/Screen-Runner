@@ -238,6 +238,13 @@ class Polygon {
 		this.boundaries();
 	}
 
+	moveBy(force) {
+		for (let v of this.vert) {
+			v.add(force.copy());
+		}
+		this.boudaries();
+	}
+
 	boundaries() {
 		this.edge = [];
 
@@ -358,7 +365,7 @@ class Polygon {
 
 					let X = (nB-nE) / (mE-mB);
 
-					if (X >= C.x && X <= D.x && X >= A.x && X <= B.x) return true;
+					if (X >= C.x && X <= D.x && X >= A.x && X <= B.x) return { "this" : this.edge, "other" : x.edge };
 
 				}
 			}

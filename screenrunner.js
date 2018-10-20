@@ -1,7 +1,9 @@
 'use strict'
 
-let cnv, player;
+let cnv, overlay, player;
 let elements = [];
+let collidables = [];
+let hitboxes = [];
 
 function setup() {
 	noLoop();
@@ -12,6 +14,15 @@ function draw() {
 	if (frameCount == 1) return;
 	//console.log("draw");
 	cnv.clear();
+	player.crashed = false;
+	for (let h of hitboxes) {
+		let res = h.collides(player.prediction());
+		if (res != false) {
+			player.crashed = true;
+			console.log(collidables[hitboxes.indexOf(h)]);
+			break;
+		}
+	}
 	player.update();
 	player.display();
 }
@@ -19,6 +30,8 @@ function draw() {
 function start() {
 	cnv = createCanvas(document.documentElement.scrollWidth, document.body.clientHeight);
 	cnv.position(0, 0).style("padding", 0).style("z-index", 1000);
+
+	overlay = createGraphics(width, height);
 	
 	// get elements & define collidables
 	elements = [...document.all];
@@ -26,16 +39,23 @@ function start() {
 	elements.splice(0, elements.indexOf(...body)+1);
 	// console.log(elements);
 
-	let collidables = elements.filter(e => isValid(e));
+  collidables = elements.filter(e => isValid(e));
 
 	console.log(collidables);
-	fill(255, 50);
-	stroke(255, 0, 0);
+	overlay.fill(255, 100);
+	overlay.stroke(255, 0, 0);
+	overlay.strokeWeight(4);
 
 	for (let c of collidables) {
 		let box = c.getBoundingClientRect();
-		console.log(c, box);
-		rect(box.x, box.y, box.width, box.height);
+		let origin = createVector(window.visualViewport.pageLeft + box.x, window.visualViewport.pageTop + box.y);
+		overlay.rect(origin.x, origin.y, box.width, box.height);
+		hitboxes.push(new Polygon(
+			origin.x		, origin.y		,
+			origin.x+c.w, origin.y		,
+			origin.x		, origin.y+c.h,
+			origin.x+c.w, origin.y+c.h
+		));
 	}
 
 	player = new Player();
@@ -86,5 +106,5 @@ function isValid(e) {
 		"DIALOG", "DETAILS", "DD", "CODE", "CANVAS", "BUTTON", "BLOCKQUOTE", "AUDIO",
 		"ARTICLE",	 "ADRESS", "A"
 	];
-	return legit.find(t => t == e.tagName) != undefined;
+	return legit.find(t => t == e.tagName) != undefined && e.className != "p5Canvas";
 }

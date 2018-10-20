@@ -7,6 +7,7 @@ class Player {
 
 	 	this.w = 3*PI/180;
 		this.boost = false;
+	 	this.crashed = false;
 	}
 
 	update() {
@@ -19,7 +20,7 @@ class Player {
  	 	} else this.boost = false;
 
  	 	this.edge();
- 	 	this.pos.add(this.vel);
+ 	 	if (!this.crashed) this.pos.add(this.vel);
  	 	this.vel.mult(0.95);
 
  	 	// auto scroll
@@ -28,19 +29,21 @@ class Player {
  	 	let h = window.innerHeight;
  	 	let w = window.innerWidth;
  	 	// bottom
- 	 	if (this.pos.y + this.vel.y >= scrollPosY + 0.75*h && Math.sign(this.vel.y) ==  1)
+ 	 	if (this.pos.y + this.vel.y >= scrollPosY + 0.75*h)
  	 		scrollPosY = this.pos.y - 0.75*h;
  	 	// top
- 	 	if (this.pos.y + this.vel.y <= scrollPosY + 0.25*h && Math.sign(this.vel.y) == -1)
+ 	 	if (this.pos.y + this.vel.y <= scrollPosY + 0.25*h)
  	 		scrollPosY = this.pos.y - 0.25*h;
  	 	// right
- 	 	if (this.pos.x + this.vel.x >= scrollPosX + 0.75*w && Math.sign(this.vel.x) ==  1)
+ 	 	if (this.pos.x + this.vel.x >= scrollPosX + 0.75*w)
  	 		scrollPosX = this.pos.x - 0.75*w;
 		// left
-		if (this.pos.x + this.vel.x <= scrollPosX + 0.25*w && Math.sign(this.vel.x) == -1)
+		if (this.pos.x + this.vel.x <= scrollPosX + 0.25*w)
 			scrollPosX = this.pos.x - 0.25*w;
 
 		window.scroll(scrollPosX, scrollPosY);
+
+		image(overlay, 0, 0);
 
  	  /*
  	 	line(scrollPosX, scrollPosY + 0.75*h, scrollPosX + w, scrollPosY + 0.75*h);
@@ -54,6 +57,8 @@ class Player {
  	display() {
  		let rot = -this.acc.heading() + HALF_PI, tp = this.pos, s = 10;
 
+ 		strokeWeight(1);
+
  		// space ship body
  	 	triangle(tp.x + s*sin(rot), tp.y + s*cos(rot),
  	 				 tp.x + 0.2*s*sin(rot-HALF_PI), tp.y + 0.2*s*cos(rot-HALF_PI),
@@ -64,11 +69,22 @@ class Player {
  	 		triangle(tp.x + 0.5*s*sin(rot -PI), tp.y + 0.5*s*cos(rot -PI),
  	 				 tp.x + 0.1*s*sin(rot-HALF_PI), tp.y + 0.1*s*cos(rot-HALF_PI),
  	 				 tp.x + 0.1*s*sin(rot+HALF_PI), tp.y + 0.1*s*cos(rot+HALF_PI));
+
+ 	 	strokeWeight(4);
+ 	 	let p = this.prediction();
+ 	 	point(p.x, p.y);
  	}
 
  	edge() {
  		if (this.pos.x + this.vel.x > width  || this.pos.x + this.vel.x < 0) this.vel.x = 0;
  		if (this.pos.y + this.vel.y > height || this.pos.y + this.vel.y < 0) this.vel.y = 0;
+ 	}
+
+ 	prediction() {
+ 		let p = this.pos.copy();
+ 		let a = this.acc.copy();
+ 		a.setMag(20);
+ 		return p.add(a);
  	}
 
 }
