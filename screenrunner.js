@@ -4,6 +4,7 @@ let cnv, player;
 let elements = [];
 let collidables = [];
 let hitboxes = [];
+let playingGIFs = [];
 let scr = "start";
 
 function setup() {
@@ -23,6 +24,7 @@ function start() {
 	lay = {
 		"projectiles" : createGraphics(width, height),
 		"player" : createGraphics(width, height),
+		"gifs" : createGraphics(width, height),
 		"overlay" : createGraphics(width, height)
 	};
 	

@@ -20,6 +20,10 @@ class Player {
  	 	if (keyIsDown(32) && this.cd <= 0) this.shootBullet();
 
  	 	if (keyIsDown(UP_ARROW)) {
+ 	 		//if (playingGIFs["boost"] == undefined) playginGIFs["boost"] = new GIF(
+ 	 		//		x, y, w, h, freq, loop,
+ 	 		//		frames...
+ 	 		//	);
  	 		this.boost = true;
  	 		this.vel.add(this.acc);
  	 	} else this.boost = false;
