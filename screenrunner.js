@@ -12,17 +12,9 @@ function setup() {
 
 function draw() {
 	if (frameCount == 1) return;
+	//Screen[scr];
 	//console.log("draw");
 	cnv.clear();
-	player.crashed = false;
-	for (let h of hitboxes) {
-		let res = h.collides(player.prediction());
-		if (!res) {
-			player.crashed = true;
-			console.log(collidables[hitboxes.indexOf(h)]);
-			break;
-		}
-	}
 	player.update();
 	player.display();
 }

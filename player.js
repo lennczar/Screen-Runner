@@ -20,6 +20,7 @@ class Player {
  	 	} else this.boost = false;
 
  	 	this.edge();
+ 	 	this.crash();
  	 	if (!this.crashed) this.pos.add(this.vel);
  	 	this.vel.mult(0.95);
 
@@ -54,6 +55,20 @@ class Player {
  	 	line(scrollPosX + 0.25*w, scrollPosY, scrollPosX + 0.25*w, scrollPosY + h);
 		*/
  	}
+
+
+ 	crash() {
+		player.crashed = false;
+		for (let h of hitboxes) {
+			let res = h.collides(player.prediction());
+			if (!res) {
+				player.crashed = true;
+				console.log(collidables[hitboxes.indexOf(h)]);
+				break;
+			}
+		}
+ 	}
+
 
  	display() {
  		let rot = -this.acc.heading() + HALF_PI, tp = this.pos, s = 10;
