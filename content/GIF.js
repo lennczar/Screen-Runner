@@ -13,14 +13,17 @@ class GIF {
 	}
 
 	update() {
-		if (frameCount % this.freq == 0) this.img++;
-		if (this.img == this.length) return this.stop();
 		let l = lay.gifs;
 		push();
-			l.transform(this.pos.x, this.pos.y);
+			l.translate(this.pos.x, this.pos.y);
 			l.rotate(this.rot);
-			l.image(this.frames[img], 0, 0);
+			l.image(this.frames[this.img], 0, 0);
 		pop();
+		console.log(this.img);
+		if (frameCount % this.freq == 0) {
+			this.img++;
+			if (this.img == this.length) return this.stop();
+		}
 	}
 
 	move(v) {

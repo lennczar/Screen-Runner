@@ -65,7 +65,7 @@ class Player {
 		for (let p of this.proj) p.update();
 
 		// update GIFs
-		for (let g of playingGIFs) g.update();
+		for (let g in playingGIFs) playingGIFs[g].update();
 
 		console.log(playingGIFs);
 
