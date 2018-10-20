@@ -1,26 +1,29 @@
 'use strict'
 
 let scr = "start";
+let img;
+
+function preload() {
+	img = loadImage('assets/images/fma.png');
+}
 
 function setup() {
-	createCanvas(300, 300);
+	createCanvas(200, 300);
 
 	lay = {
 		"bg" : createGraphics(width, height),
 		"gui" : createGraphics(width, height)
 	};
 
-	let p = Polygon.fromCircle(width/2, height/2, 40, 3);
-
-	p.display();
 
 	//Button: play
-	button["play"] = new PolyButton(p, "play", 
+	button["play"] = new RectButton(width/2, height/2, 120, 90, "play", 
 		{
-			text : {fill: color(0)}, mOtext : {}, 
-			box : {stroke: color(0), strokeWeight: 1}, mObox : {stroke: color(255, 255, 0), strokeWeight: 1}
+			text : {}, mOtext : {}, 
+			box : {}, mObox : {}
 		},
-		undefined, lay.gui, undefined, true, () => {
+		img, lay.gui, undefined, true, () => {
+			//func
 			scr = "running";
 			request("start");
 		});

@@ -125,7 +125,7 @@ class RectButton {
 		l.text(t && t.text ? t.text : this.text, this.pos.x, this.pos.y);
 
 		l.imageMode(CENTER);
-		if (this.img) l.image(this.img, this.pos.x, this.pos.y, this.img.width, this.img.height);
+		if (this.img) l.image(this.img, this.pos.x, this.pos.y, this.s.x, this.s.y);
 		if (!this.layerGiven) image(l, 0, 0);
 	}
 }
