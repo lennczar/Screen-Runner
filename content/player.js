@@ -13,6 +13,18 @@ class Player {
 	 	this.cooldown = 30;
 	 	this.cd = this.cooldown;
 	 	this.projID = 0;
+
+	 	this.crash();
+	 	this.findPos();
+	}
+
+	findPos() {
+		while(this.crashed == true) {
+			this.pos = createVector(random(width), window.visualViewport.pageTop + random(window.innerHeight));
+			this.crash();
+		}
+
+		console.log(this.pos);
 	}
 
 	update() {
@@ -22,18 +34,46 @@ class Player {
 
  	 	if (keyIsDown(UP_ARROW)) {
  	 		if (playingGIFs["boost"] == undefined) playingGIFs["boost"] = new GIF(
- 	 				this, "player.pos.x", "player.pos.y", 80, 80, "player.acc.heading() - HALF_PI", 3, true, {x : -36, y : -60},
- 	 				imgData["antrieb_1"],
- 	 				imgData["antrieb_2"],
- 	 				imgData["antrieb_3"],
- 	 				imgData["antrieb_4"],
- 	 				imgData["antrieb_5"],
- 	 				imgData["antrieb_6"],
- 	 				imgData["antrieb_7"],
+ 	 				this, "boost", "player.pos.x", "player.pos.y", 80, 80, "player.acc.heading() - HALF_PI", 3, true, {x : -36, y : -60},
+ 	 				[
+ 	 					imgData["start_1"],
+ 	 					imgData["start_2"],
+ 	 					imgData["start_3"],
+ 	 					imgData["start_4"],
+ 	 					imgData["start_5"],
+ 	 					imgData["start_6"],
+ 	 					imgData["start_7"],
+ 	 					imgData["start_8"],
+ 	 					imgData["start_9"],
+ 	 					imgData["start_10"],
+ 	 					imgData["start_11"],
+ 	 					imgData["start_12"]
+ 	 				], [
+	 	 			 	imgData["antrieb_1"],
+	 	 				imgData["antrieb_2"],
+	 	 				imgData["antrieb_3"],
+	 	 				imgData["antrieb_4"],
+	 	 				imgData["antrieb_5"],
+	 	 				imgData["antrieb_6"],
+	 	 				imgData["antrieb_7"]
+ 	 				], [
+ 	 					imgData["ende_1"],
+ 	 					imgData["ende_2"],
+ 	 					imgData["ende_3"],
+ 	 					imgData["ende_4"],
+ 	 					imgData["ende_5"],
+ 	 					imgData["ende_6"],
+ 	 					imgData["ende_7"],
+ 	 					imgData["ende_8"],
+ 	 					imgData["ende_9"]
+ 	 				]
  	 			);
  	 		this.boost = true;
  	 		this.vel.add(this.acc);
- 	 	} else this.boost = false;
+ 	 	} else {
+ 	 		this.boost = false;
+ 	 		if (playingGIFs["boost"] != undefined && playingGIFs["boost"].state != "end") playingGIFs["boost"].end();
+ 	 	}
 
  	 	this.cd--;
 
@@ -85,11 +125,11 @@ class Player {
 
 
  	crash() {
-		player.crashed = false;
+		this.crashed = false;
 		for (let h of hitboxes) {
-			let res = h.collides(player.prediction());
+			let res = h.collides(this.prediction());
 			if (res) {
-				player.crashed = true;
+				this.crashed = true;
 				//console.log(collidables[hitboxes.indexOf(h)]);
 				break;
 			}

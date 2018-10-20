@@ -1,18 +1,29 @@
 class GIF {
 
-	constructor() {
-		this.self = arguments[0];
-		this.x = arguments[1];
-		this.y = arguments[2];
-		this.w = arguments[3];
-		this.h = arguments[4];
-		this.rot = arguments[5];
-		this.freq = arguments[6];
-		this.loop = arguments[7];
-		this.correct = arguments[8];
-		this.frames = [...arguments].splice(9);
-		this.length = arguments.length -9;
+	constructor(parent, name, x, y, w, h, rot, freq, loop, correct, onStart, frames, onEnd) {
+		this.parent = parent,
+		this.name = name;
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+		this.rot = rot;
+		this.freq = freq;
+		this.loop = loop;
+		this.correct = correct;
+		this.onStart = onStart;
+		this.frames = frames;
+		this.onEnd = onEnd;
+ 		this.length = {
+ 			start : this.onStart.length,
+ 			going : this.frames.length,
+ 			end   : this.onEnd.length
+ 		};
 		this.img = 0;
+		if (this.onStart.length != 0)
+			this.state = "start";
+		else
+			this.state = "going";
 	}
 
 	update() {
@@ -20,11 +31,19 @@ class GIF {
 		l.push();
 			l.translate(eval(this.x), eval(this.y));
 			l.rotate(eval(this.rot));
-			l.image(this.frames[this.img], this.correct.x, this.correct.y, this.w, this.h);
+			let f;
+			if (this.state == "start") f = this.onStart;
+			if (this.state == "going") f = this.frames;
+			if (this.state == "end"  ) f = this.onEnd;
+			l.image(f[this.img], this.correct.x, this.correct.y, this.w, this.h);
 		l.pop();
 		if (frameCount % this.freq == 0) {
 			this.img++;
-			if (this.img == this.length) return this.stop();
+			//console.log(this.state, this.img);
+			if (this.img == this.length[this.state]) {
+				this.stop();
+				return true;
+			}
 		}
 	}
 
@@ -33,16 +52,30 @@ class GIF {
 	}
 
 	stop() {
-		if (this.loop) {
-			this.start();
-		} else {
-			delete this;
-			return true;
+		if (this.state == "end")
+			this.kill();
+		if (this.state == "start") 
+			this.state = "going"; 
+		if (!this.loop && this.state == "going")  {
+			this.state = "end";
+			if (this.onEnd.length == 0) this.kill();
 		}
+		this.restart();
 	}
 
-	start() {
+	restart() {
 		this.img = 0;
+		//console.log("resetting");
+	}
+
+	end() {
+		this.state = "end";
+		this.restart();
+	}
+
+	kill() {
+		delete playingGIFs[this.name];
+		//console.log("killed");
 	}
 
 }
