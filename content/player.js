@@ -34,7 +34,7 @@ class Player {
 
  	 	if (keyIsDown(UP_ARROW)) {
  	 		if (playingGIFs["boost"] == undefined) playingGIFs["boost"] = new GIF(
- 	 				this, "boost", "player.pos.x", "player.pos.y", 64, 64, "player.acc.heading() - HALF_PI", 3, true, {x : -29, y : -48},
+ 	 				this, "boost", "player.pos.x", "player.pos.y", 64, 64, "player.acc.heading() - HALF_PI", 3, true, {x : -27, y : -48},
  	 				[
  	 					imgData["st_1"],
  	 					imgData["st_2"],
@@ -79,11 +79,7 @@ class Player {
 
  	 	this.edge();
  	 	this.crash();
- 	 	//if (!this.crashed) this.pos.add(this.vel);
- 	 	if (!this.crashed)
- 	 		this.pos.add(this.vel);
- 	 	else
- 	 		this.vel.mult(0);
+ 	 	this.pos.add(this.vel);
  	 	this.vel.mult(0.95);
 
  	 	// auto scroll
@@ -180,7 +176,7 @@ class Player {
  		l.push();
  			l.translate(tp.x, tp.y);
  			l.rotate(-rot + PI);
- 			l.image(imgData["ha_1"], -18, -26, 32, 32);
+ 			l.image(imgData["ha_1"], -27, -39, 48, 48);
  		l.pop();
 
  		/* 		
@@ -216,7 +212,11 @@ class Player {
  	}
 
  	shootBullet() {
- 		this.proj.push(new Bullet(this.pos.x, this.pos.y, this.acc, this.projID++));
+ 		let tp = this.pos.copy();
+ 		let cor = createVector(50, -10);
+ 		cor.rotate(this.acc.heading());
+ 		tp.add(cor);
+ 		this.proj.push(new Bullet(tp.x, tp.y, this.acc, this.projID++));
  		//soundData[].play();
  		this.cd = this.cooldown;
  	}
