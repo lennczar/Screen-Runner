@@ -36,18 +36,18 @@ class Player {
  	 		if (playingGIFs["boost"] == undefined) playingGIFs["boost"] = new GIF(
  	 				this, "boost", "player.pos.x", "player.pos.y", 64, 64, "player.acc.heading() - HALF_PI", 3, true, {x : -29, y : -48},
  	 				[
- 	 					imgData["start_1"],
- 	 					imgData["start_2"],
- 	 					imgData["start_3"],
- 	 					imgData["start_4"],
- 	 					imgData["start_5"],
- 	 					imgData["start_6"],
- 	 					imgData["start_7"],
- 	 					imgData["start_8"],
- 	 					imgData["start_9"],
- 	 					imgData["start_10"],
- 	 					imgData["start_11"],
- 	 					imgData["start_12"]
+ 	 					imgData["st_1"],
+ 	 					imgData["st_2"],
+ 	 					imgData["st_3"],
+ 	 					imgData["st_4"],
+ 	 					imgData["st_5"],
+ 	 					imgData["st_6"],
+ 	 					imgData["st_7"],
+ 	 					imgData["st_8"],
+ 	 					imgData["st_9"],
+ 	 					imgData["st_10"],
+ 	 					imgData["st_11"],
+ 	 					imgData["st_12"]
  	 				], [
 	 	 			 	imgData["antrieb_1"],
 	 	 				imgData["antrieb_2"],
@@ -91,20 +91,31 @@ class Player {
  	 	let scrollPosX = window.visualViewport.pageLeft;
  	 	let h = window.innerHeight;
  	 	let w = window.innerWidth;
+ 	 	let scrolled = false;
  	 	// bottom
- 	 	if (this.pos.y + this.vel.y >= scrollPosY + 0.75*h)
+ 	 	if (this.pos.y + this.vel.y >= scrollPosY + 0.75*h) {
  	 		scrollPosY = this.pos.y - 0.75*h;
+ 	 		scrolled = true;
+ 	 	}
  	 	// top
- 	 	if (this.pos.y + this.vel.y <= scrollPosY + 0.25*h)
+ 	 	if (this.pos.y + this.vel.y <= scrollPosY + 0.25*h) {
  	 		scrollPosY = this.pos.y - 0.25*h;
+ 	 		scrolled = true;
+ 	 	}
  	 	// right
- 	 	if (this.pos.x + this.vel.x >= scrollPosX + 0.75*w)
+ 	 	if (this.pos.x + this.vel.x >= scrollPosX + 0.75*w) {
  	 		scrollPosX = this.pos.x - 0.75*w;
+ 	 		scrolled = true;
+ 	 	}
 		// left
-		if (this.pos.x + this.vel.x <= scrollPosX + 0.25*w)
+		if (this.pos.x + this.vel.x <= scrollPosX + 0.25*w) {
 			scrollPosX = this.pos.x - 0.25*w;
+			scrolled = true;
+		}
 
 		window.scroll(scrollPosX, scrollPosY);
+
+		if (scrolled) getHitboxes();	
 
 		// update bullets
 		for (let p of this.proj) p.update();
@@ -131,31 +142,31 @@ class Player {
 			let res = h.hitbox.collides(this.prediction());
 			if (res) {
 
-				if (res.origin.x + res.w < this.pos.x && this.acc.x < 0 && this.acc.y < 0) {            //links || obenlinks
+				if (res.origin.x + res.w < this.pos.x && this.vel.x < 0 && this.vel.y < 0) {            //links || obenlinks
             this.acc.rotate(this.w *2);
             this.vel.x = 0;
-        }else if (res.origin.x + res.w < this.pos.x &&   this.acc.x < 0 && this.acc.y > 0) {                   //links || untenlinks
+        }else if (res.origin.x + res.w < this.pos.x && this.vel.x < 0 && this.vel.y > 0) {                   //links || untenlinks
             this.acc.rotate(-this.w *2);
             this.vel.x = 0;
-        }else if (res.origin.x > this.pos.x &&   this.acc.x > 0 && this.acc.y < 0) {                   //rechts || obenrechts
+        }else if (res.origin.x > this.pos.x && this.vel.x > 0 && this.vel.y < 0) {                   //rechts || obenrechts
             this.acc.rotate(-this.w *2);
             this.vel.x = 0;
-        }else if (res.origin.x > this.pos.x &&   this.acc.x > 0 && this.acc.y > 0) {                   //rechts || untenrechts
+        }else if (res.origin.x > this.pos.x && this.vel.x > 0 && this.vel.y > 0) {                   //rechts || untenrechts
             this.acc.rotate(this.w *2);
             this.vel.x = 0;
-        }else if (res.origin.y + res.h < this.pos.y &&   this.acc.x > 0 && this.acc.y < 0) {                   //oben || obenrechts
+        }else if (res.origin.y + res.h < this.pos.y && this.vel.x > 0 && this.vel.y < 0) {                   //oben || obenrechts
             this.acc.rotate(this.w *2);
             this.vel.y = 0;
-        }else if (res.origin.y + res.h < this.pos.y &&   this.acc.x < 0 && this.acc.y < 0) {                   //oben || obenlinks
+        }else if (res.origin.y + res.h < this.pos.y && this.vel.x < 0 && this.vel.y < 0) {                   //oben || obenlinks
             this.acc.rotate(-this.w *2);
             this.vel.y = 0;
-        }else if (res.origin.y> this.pos.y &&    this.acc.x > 0 && this.acc.y > 0) {                   //unten || untenrechts
+        }else if (res.origin.y> this.pos.y && this.vel.x > 0 && this.vel.y > 0) {                   //unten || untenrechts
             this.acc.rotate(-this.w *2);
             this.vel.y = 0;
-        }else if (res.origin.y> this.pos.y &&    this.acc.x < 0 && this.acc.y > 0) {                   //unten || untenlinks
+        }else if (res.origin.y> this.pos.y && this.vel.x < 0 && this.vel.y > 0) {                   //unten || untenlinks
             this.acc.rotate(this.w *2);
             this.vel.y = 0;
-        }
+        }else this.crashed = true;
 				//console.log(collidables[hitboxes.indexOf(h.hitbox)]);
 				break;
 			}
@@ -169,10 +180,10 @@ class Player {
  		l.push();
  			l.translate(tp.x, tp.y);
  			l.rotate(-rot + PI);
- 			l.image(imgData["hand_1"], -36, -52, 64, 64);
+ 			l.image(imgData["hand_1"], -18, -26, 32, 32);
  		l.pop();
 
- 		/*
+ 		/* 		
  		l.strokeWeight(1).fill(255);
 
  		// space ship body
@@ -189,7 +200,7 @@ class Player {
  	 	// l.strokeWeight(4);
  	 	// let p = this.prediction();
  	 	// l.point(p.x, p.y);
- 		*/
+ 	 	*/ 			
  	}
 
  	edge() {
