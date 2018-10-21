@@ -8,7 +8,7 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(200, 300);
+	createCanvas(200, 125);
 
 	lay = {
 		"bg" : createGraphics(width, height),
@@ -17,7 +17,7 @@ function setup() {
 
 
 	//Button: play
-	button["play"] = new RectButton(width/2, height/2, 120, 90, "play", 
+	button["play"] = new RectButton(width/2, height/2, 162, 100, "play", 
 		{
 			text : {}, mOtext : {}, 
 			box : {}, mObox : {}
