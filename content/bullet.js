@@ -64,15 +64,20 @@ class Bullet {
 	hit(h) {
 		h.life -= this.dmg;
 		if (h.life <= 0) {
+		  soundData["Grenade+1wav.mp3"].play();
+
 			collidables[hitboxes.indexOf(h)].style.display = "none";
 			delete h["hitbox"];
 			getHitboxes();
 		}
-		console.log(h);
+		//console.log(h);
 		let hPos = this.pos;
 		let rot = this.vel.heading();
 		delete playingGIFs["proj#" + this.id];
 		player.proj.splice(player.proj.indexOf(this), 1);
+
+		soundData["Shot.mp3"].play();
+
 
 		playingGIFs["coll#" + this.id] = new GIF(
  			this, "coll#" + this.id, hPos.x, hPos.y, 64, 64,

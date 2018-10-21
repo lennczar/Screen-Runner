@@ -53,7 +53,12 @@ const names = [
 ];
 
 const sounds = [
-	"a_great_comeback_terrasound.mp3"
+	"Shot.mp3",
+	"Explosion+1.mp3",
+	"Grenade+1wav.mp3",
+	"Ping.mp3",
+	"Grenade+2.mp3",
+	"wooosh.mp3"
 ];
 
 function preload() {

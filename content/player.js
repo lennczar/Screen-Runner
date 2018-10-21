@@ -217,7 +217,7 @@ class Player {
  		cor.rotate(this.acc.heading());
  		tp.add(cor);
  		this.proj.push(new Bullet(tp.x, tp.y, this.acc, this.projID++));
- 		//soundData[].play();
+ 		soundData["wooosh.mp3"].play();
  		this.cd = this.cooldown;
  	}
 
