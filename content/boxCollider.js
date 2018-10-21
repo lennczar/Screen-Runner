@@ -8,7 +8,7 @@ class BoxCollider {
 
 	collides(p) {
 		let o = this.origin, w = this.w, h = this.h;
-		return (p.x > o.x && p.x < o.x +w && p.y > o.y && p.y < o.y +h);
+		return (p.x > o.x && p.x < o.x +w && p.y > o.y && p.y < o.y +h) ? this : false;
 	}
 
 	display() {

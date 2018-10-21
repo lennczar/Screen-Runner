@@ -127,10 +127,35 @@ class Player {
  	crash() {
 		this.crashed = false;
 		for (let h of hitboxes) {
-			let res = h.collides(this.prediction());
+			let res = h.hitbox.collides(this.prediction());
 			if (res) {
-				this.crashed = true;
-				//console.log(collidables[hitboxes.indexOf(h)]);
+
+				if (res.origin.x + res.w < this.pos.x && this.acc.x < 0 && this.acc.y < 0) {            //links || obenlinks
+            this.acc.rotate(this.w *2);
+            this.vel.x = 0;
+        }else if (res.origin.x + res.w < this.pos.x &&   this.acc.x < 0 && this.acc.y > 0) {                   //links || untenlinks
+            this.acc.rotate(-this.w *2);
+            this.vel.x = 0;
+        }else if (res.origin.x > this.pos.x &&   this.acc.x > 0 && this.acc.y < 0) {                   //rechts || obenrechts
+            this.acc.rotate(-this.w *2);
+            this.vel.x = 0;
+        }else if (res.origin.x > this.pos.x &&   this.acc.x > 0 && this.acc.y > 0) {                   //rechts || untenrechts
+            this.acc.rotate(this.w *2);
+            this.vel.x = 0;
+        }else if (res.origin.y + res.h < this.pos.y &&   this.acc.x > 0 && this.acc.y < 0) {                   //oben || obenrechts
+            this.acc.rotate(this.w *2);
+            this.vel.y = 0;
+        }else if (res.origin.y + res.h < this.pos.y &&   this.acc.x < 0 && this.acc.y < 0) {                   //oben || obenlinks
+            this.acc.rotate(-this.w *2);
+            this.vel.y = 0;
+        }else if (res.origin.y> this.pos.y &&    this.acc.x > 0 && this.acc.y > 0) {                   //unten || untenrechts
+            this.acc.rotate(-this.w *2);
+            this.vel.y = 0;
+        }else if (res.origin.y> this.pos.y &&    this.acc.x < 0 && this.acc.y > 0) {                   //unten || untenlinks
+            this.acc.rotate(this.w *2);
+            this.vel.y = 0;
+        }
+				//console.log(collidables[hitboxes.indexOf(h.hitbox)]);
 				break;
 			}
 		}

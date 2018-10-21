@@ -45,7 +45,9 @@ function start() {
 		let box = c.getBoundingClientRect();
 		let origin = createVector(window.visualViewport.pageLeft + box.x, window.visualViewport.pageTop + box.y);
 		lay.overlay.rect(origin.x, origin.y, box.width, box.height);
-		hitboxes.push(new BoxCollider(origin.x, origin.y, box.width, box.height));
+		let h = new BoxCollider(origin.x, origin.y, box.width, box.height);
+		let l = box.width * box.height;
+		hitboxes.push({hitbox: h, life: l});
 	}
 
 	player = new Player();

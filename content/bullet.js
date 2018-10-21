@@ -6,6 +6,7 @@ class Bullet {
 		this.speed = 10;
 		this.vel.setMag(this.speed);
 		this.id = id;
+		this.dmg = 5000;
 	}
 
 	update() {
@@ -50,16 +51,22 @@ class Bullet {
 
 	testHit() {
 		for (let h of hitboxes) {
-			let res = h.collides(this.pos.copy());
+			let res = h.hitbox.collides(this.pos.copy());
 			if (res) {
-				this.hit();
+				this.hit(h);
 				//console.log(collidables[hitboxes.indexOf(h)]);
 				break;
 			}
 		}
 	}
 
-	hit() {
+	hit(h) {
+		h.life -= this.dmg;
+		console.log(h);
+		if (h.life <= 0) {
+			collidables[hitboxes.indexOf(h)].style.display = "none";
+			hitboxes.splice(h, 1);
+		}
 		let hPos = this.pos;
 		let rot = this.vel.heading();
 		delete playingGIFs["proj#" + this.id];
