@@ -33,16 +33,16 @@ class Bullet {
  				3, true, {x : -40, y : -32},
  				[],
  				[
-					imgData["projectile_1"],
-					imgData["projectile_2"],
-					imgData["projectile_3"],
-					imgData["projectile_4"],
-					imgData["projectile_5"],
-					imgData["projectile_6"],
-					imgData["projectile_7"],
-					imgData["projectile_8"],
-					imgData["projectile_9"],
-					imgData["projectile_10"]
+					imgData["pj_1"],
+					imgData["pj_2"],
+					imgData["pj_3"],
+					imgData["pj_4"],
+					imgData["pj_5"],
+					imgData["pj_6"],
+					imgData["pj_7"],
+					imgData["pj_8"],
+					imgData["pj_9"],
+					imgData["pj_10"]
 				],
 				[]
 			);
@@ -79,15 +79,15 @@ class Bullet {
  			rot, 3, false, {x : -40, y : -32},
  			[],
  			[
-				imgData["exploding-projectile-1"],
-				imgData["exploding-projectile-2"],
-				imgData["exploding-projectile-3"],
-				imgData["exploding-projectile-4"],
-				imgData["exploding-projectile-5"],
-				imgData["exploding-projectile-6"],
-				imgData["exploding-projectile-7"],
-				imgData["exploding-projectile-8"],
-				imgData["exploding-projectile-9"]
+				imgData["ep-1"],
+				imgData["ep-2"],
+				imgData["ep-3"],
+				imgData["ep-4"],
+				imgData["ep-5"],
+				imgData["ep-6"],
+				imgData["ep-7"],
+				imgData["ep-8"],
+				imgData["ep-9"]
 			],
 			[]
 		);

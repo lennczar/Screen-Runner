@@ -49,23 +49,23 @@ class Player {
  	 					imgData["st_11"],
  	 					imgData["st_12"]
  	 				], [
-	 	 			 	imgData["antrieb_1"],
-	 	 				imgData["antrieb_2"],
-	 	 				imgData["antrieb_3"],
-	 	 				imgData["antrieb_4"],
-	 	 				imgData["antrieb_5"],
-	 	 				imgData["antrieb_6"],
-	 	 				imgData["antrieb_7"]
+	 	 			 	imgData["an_1"],
+	 	 				imgData["an_2"],
+	 	 				imgData["an_3"],
+	 	 				imgData["an_4"],
+	 	 				imgData["an_5"],
+	 	 				imgData["an_6"],
+	 	 				imgData["an_7"]
  	 				], [
- 	 					imgData["ende_1"],
- 	 					imgData["ende_2"],
- 	 					imgData["ende_3"],
- 	 					imgData["ende_4"],
- 	 					imgData["ende_5"],
- 	 					imgData["ende_6"],
- 	 					imgData["ende_7"],
- 	 					imgData["ende_8"],
- 	 					imgData["ende_9"]
+ 	 					imgData["en_1"],
+ 	 					imgData["en_2"],
+ 	 					imgData["en_3"],
+ 	 					imgData["en_4"],
+ 	 					imgData["en_5"],
+ 	 					imgData["en_6"],
+ 	 					imgData["en_7"],
+ 	 					imgData["en_8"],
+ 	 					imgData["en_9"]
  	 				]
  	 			);
  	 		this.boost = true;
@@ -180,7 +180,7 @@ class Player {
  		l.push();
  			l.translate(tp.x, tp.y);
  			l.rotate(-rot + PI);
- 			l.image(imgData["hand_1"], -18, -26, 32, 32);
+ 			l.image(imgData["ha_1"], -18, -26, 32, 32);
  		l.pop();
 
  		/* 		
