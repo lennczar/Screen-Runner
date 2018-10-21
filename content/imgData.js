@@ -47,7 +47,8 @@ const names = [
 	"exploding projectiles/exploding-projectile-6",
 	"exploding projectiles/exploding-projectile-7",
 	"exploding projectiles/exploding-projectile-8",
-	"exploding projectiles/exploding-projectile-9"
+	"exploding projectiles/exploding-projectile-9",
+	"skins/hand_1"
 ];
 
 function preload() {

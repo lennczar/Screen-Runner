@@ -34,7 +34,7 @@ class Player {
 
  	 	if (keyIsDown(UP_ARROW)) {
  	 		if (playingGIFs["boost"] == undefined) playingGIFs["boost"] = new GIF(
- 	 				this, "boost", "player.pos.x", "player.pos.y", 80, 80, "player.acc.heading() - HALF_PI", 3, true, {x : -36, y : -60},
+ 	 				this, "boost", "player.pos.x", "player.pos.y", 64, 64, "player.acc.heading() - HALF_PI", 3, true, {x : -29, y : -48},
  	 				[
  	 					imgData["start_1"],
  	 					imgData["start_2"],
@@ -140,6 +140,13 @@ class Player {
  	display() {
  		let l = lay.player, rot = -this.acc.heading() + HALF_PI, tp = this.pos, s = 10;
 
+ 		l.push();
+ 			l.translate(tp.x, tp.y);
+ 			l.rotate(-rot + PI);
+ 			l.image(imgData["hand_1"], -36, -52, 64, 64);
+ 		l.pop();
+
+ 		/*
  		l.strokeWeight(1).fill(255);
 
  		// space ship body
@@ -156,6 +163,7 @@ class Player {
  	 	// l.strokeWeight(4);
  	 	// let p = this.prediction();
  	 	// l.point(p.x, p.y);
+ 		*/
  	}
 
  	edge() {
