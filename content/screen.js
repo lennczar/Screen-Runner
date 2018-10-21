@@ -4,7 +4,7 @@ const Screenr = {
 
 		player.update();
 		player.display();
-		hitboxes.forEach(h => h.hitbox.display());
+		for (let h of hitboxes) if (h.hitbox != undefined) h.hitbox.display();
 
 		cnv.clear();
 		for (let l in lay) {

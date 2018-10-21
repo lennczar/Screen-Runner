@@ -127,6 +127,7 @@ class Player {
  	crash() {
 		this.crashed = false;
 		for (let h of hitboxes) {
+			if (h.hitbox == undefined) continue;
 			let res = h.hitbox.collides(this.prediction());
 			if (res) {
 

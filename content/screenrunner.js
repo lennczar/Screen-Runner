@@ -46,7 +46,7 @@ function start() {
 		let origin = createVector(window.visualViewport.pageLeft + box.x, window.visualViewport.pageTop + box.y);
 		lay.overlay.rect(origin.x, origin.y, box.width, box.height);
 		let h = new BoxCollider(origin.x, origin.y, box.width, box.height);
-		let l = box.width * box.height;
+		let l = sqrt(box.width * box.height);
 		hitboxes.push({hitbox: h, life: l});
 	}
 
@@ -108,4 +108,14 @@ function isValid(e) {
 		"ARTICLE",	 "ADRESS", "A"
 	];
 	return legit.find(t => t == e.tagName) != undefined && e.className != "p5Canvas";
+}
+
+function getHitboxes() {
+	for (let c of collidables) {
+		let box = c.getBoundingClientRect();
+		let origin = createVector(window.visualViewport.pageLeft + box.x, window.visualViewport.pageTop + box.y);
+		lay.overlay.rect(origin.x, origin.y, box.width, box.height);
+		let h = new BoxCollider(origin.x, origin.y, box.width, box.height);
+		hitboxes[collidables.indexOf(c)].hitbox = h;
+	}
 }
