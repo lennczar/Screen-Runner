@@ -217,6 +217,7 @@ class Player {
 
  	shootBullet() {
  		this.proj.push(new Bullet(this.pos.x, this.pos.y, this.acc, this.projID++));
+ 		//soundData[].play();
  		this.cd = this.cooldown;
  	}
 

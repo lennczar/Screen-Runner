@@ -1,4 +1,5 @@
 const imgData = [];
+const soundData = [];
 
 const names = [
 	"triebwerk/an_1",
@@ -51,7 +52,16 @@ const names = [
 	"skins/ha_1"
 ];
 
+const sounds = [
+	"a_great_comeback_terrasound.mp3"
+];
+
 function preload() {
+	
+	for (let sound of sounds) {
+		soundData[sound] = loadSound("https://s3-eu-west-1.amazonaws.com/codebakery/" + sound ); 
+	}
+
 	for (let name of names) {
 		imgData[name.split("/")[1]] = loadImage("https://res.cloudinary.com/dppptdvdv/" + name + ".png");
 	}

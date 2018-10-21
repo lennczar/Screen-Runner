@@ -10,6 +10,7 @@
 			"js" : [
 				"library/p5.js",
 				"library/p5.dom.js",
+				"library/p5.sound.js",
 				"library/GUI.js",
 				"content/screen.js",
 				"content/player.js",
