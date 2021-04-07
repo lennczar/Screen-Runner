@@ -64,7 +64,7 @@ class Bullet {
 	hit(h) {
 		h.life -= this.dmg;
 		if (h.life <= 0) {
-		  soundData["Grenade+1wav.mp3"].play();
+		  soundData["Explosion+1.mp3"].play();
 
 			collidables[hitboxes.indexOf(h)].style.display = "none";
 			delete h["hitbox"];

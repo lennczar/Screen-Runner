@@ -54,20 +54,18 @@ const names = [
 
 const sounds = [
 	"Shot.mp3",
-	"Explosion+1.mp3",
-	"Grenade+1wav.mp3",
-	"Ping.mp3",
-	"Grenade+2.mp3",
-	"wooosh.mp3"
+	"Explosion+1.mp3"
 ];
 
 function preload() {
+
+	soundFormats('mp3', 'ogg');
 	
 	for (let sound of sounds) {
-		soundData[sound] = loadSound("https://s3-eu-west-1.amazonaws.com/codebakery/" + sound ); 
+		soundData[sound] = loadSound(chrome.runtime.getURL("../assets/sounds/" + sound)); 
 	}
 
 	for (let name of names) {
-		imgData[name.split("/")[1]] = loadImage("https://res.cloudinary.com/dppptdvdv/" + name + ".png");
+		imgData[name.split("/")[1]] = loadImage(chrome.runtime.getURL("../assets/sprites/" + name + ".png"));
 	}
 }

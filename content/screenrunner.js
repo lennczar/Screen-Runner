@@ -119,3 +119,10 @@ function getHitboxes() {
 		hitboxes[collidables.indexOf(c)].hitbox = h;
 	}
 }
+
+function keyPressed() {
+
+	if (getAudioContext().state !== 'running')
+    	getAudioContext().resume();
+
+}

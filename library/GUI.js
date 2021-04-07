@@ -18,15 +18,8 @@ function updateMouse(pad = 40) {
 }
 
 function mousePressed() {
-  cursorTimer = 50;
 	clicked = true;
 }
-
-function mouseMoved() {
-  cursor();
-  cursorTimer = 50;
-}
-
 
 // --- GENERAL USER INTERFACE ---
 
